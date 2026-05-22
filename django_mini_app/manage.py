@@ -20,19 +20,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-"""
-manage.py — это:
-
-CLI интерфейс Django
-
-(Command Line Interface)
-
-Через него Django:
-
-запускает сервер
-делает миграции
-создает superuser
-создает apps
-работает с БД
-"""

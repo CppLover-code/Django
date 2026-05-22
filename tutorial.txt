@@ -1,0 +1,108 @@
+Django Mini App — полный tutorial с нуля
+
+1. Создать папку проекта
+DJANGO
+
+2. Перейти в папку
+cd Desktop\PythonProjects\DJANGO
+
+3. Создать virtual environment
+py -m venv .venv
+
+4. Активировать venv
+.venv\Scripts\activate
+
+5. Установить Django
+pip install django
+
+6. Создать Django project
+django-admin startproject config .
+После этого структура:
+DJANGO/
+│
+├── .venv/
+├── manage.py
+└── config/
+
+7. Сделать миграции
+py manage.py migrate
+
+8. Создать superuser
+py manage.py createsuperuser
+
+9. Запустить сервер
+py manage.py runserver 9000
+
+10. Открыть admin panel
+http://127.0.0.1:9000/admin
+
+11. Создать app
+py manage.py startapp users
+Структура:
+DJANGO/
+│
+├── config/
+├── users/
+├── manage.py
+
+12. Подключить app
+
+Файл:
+
+config/settings.py
+
+Добавить:
+
+'users',
+
+в:
+
+INSTALLED_APPS
+
+13. Создать модель
+
+Файл:
+
+users/models.py
+from django.db import models
+
+class User(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+14. Создать migrations
+py manage.py makemigrations
+
+15. Применить migrations
+py manage.py migrate
+
+16. Подключить admin
+
+Файл:
+
+users/admin.py
+from django.contrib import admin
+from .models import User
+
+admin.site.register(User)
+
+17. Запустить сервер
+py manage.py runserver 9000
+
+18. Открыть admin
+http://127.0.0.1:9000/admin
+
+Итог:
+✅ Django project
+✅ Virtual environment
+✅ Django app
+✅ Models
+✅ SQLite database
+✅ Migrations
+✅ Admin panel
+✅ Superuser
+✅ CRUD через admin panel

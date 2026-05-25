@@ -14,8 +14,8 @@ class Category(models.Model):
 class Book(models.Model):
 
     title = models.CharField(max_length=100)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    category = models.ManyToManyField(Category)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
+    categories = models.ManyToManyField(Category, related_name="books")
 
     def __str__(self):
         return f"{self.title, self.author, self.category}"

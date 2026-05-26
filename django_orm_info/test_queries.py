@@ -17,7 +17,7 @@ def get_all_books():
 
     books = Book.objects.all()
 
-    print("All books:")
+    print("All books:\n")
     for book in books:
         print(f"{book.title}\n")
 
@@ -94,7 +94,19 @@ def get_last_book():
 
     l_book = Book.objects.last()
 
-    print(f"First book: {l_book}\n")
+    print(f"Last book: {l_book}\n")
+
+# получить книгу по индексу
+def get_book_by_index(index):
+
+    ind = index
+    try:
+        book = Book.objects.get(id=ind)
+        print(f"Book index {ind} - {book.title}\n")
+
+    except Book.DoesNotExist:
+        print("Book not found!")
+
 
 get_all_authors()
 get_all_books()
@@ -103,6 +115,10 @@ get_book_cat()
 get_all_books_authors_cat()
 get_first_book()
 get_last_book()
+# **************************
+get_book_by_index(2)
+get_book_by_index(10)
+# **************************
 
 
 

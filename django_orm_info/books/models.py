@@ -18,4 +18,4 @@ class Book(models.Model):
     categories = models.ManyToManyField(Category, related_name="books")
 
     def __str__(self):
-        return f"{self.title, self.author, self.category}"
+        return f"{self.title}"

@@ -4,11 +4,12 @@ def get_all_authors():
 
     authors = Author.objects.all()
 
-    print(authors)
+    # print(authors)
 
-"""
-def main():
-    print("DB TEST:\n")
-    get_all_authors()
-"""
+    for author in authors:
+        print (author.name)
+        
+# python manage.py shell
+# exec(open("test_queries.py").read())
+
 get_all_authors()

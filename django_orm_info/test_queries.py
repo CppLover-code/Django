@@ -21,13 +21,66 @@ def get_all_books():
     for book in books:
         print(f"{book.title}\n")
 
-# получить все книги с авторами и категориями
-def get_all_books_authors():
+# получить книги и их авторов
+def get_book_author():
 
-    books = Book.objects.all()
-    print("All books with authors and categories:")
+    books = Book.objects.select_related("author")
+
+    print(f"All books with authors:\n")
+
+    # enumerate автоматически считает номера
+    for index, book in enumerate(books, start=1):
+    
+        print(
+            f"{index}. "
+            f"{book.title} - "
+            f"{book.author.name}\n"
+            )
+
+# получить книги и категории
+def get_book_cat():
+
+    books = Book.objects.prefetch_related("categories")
+
+    print(f"All books with categories:\n")
+
+    # enumerate автоматически считает номера
+    for index, book in enumerate(books, start=1):
+        
+        categories = ", ".join(
+            category.title
+            for category in book.categories.all()
+        )
+
+        print(
+            f"{index}. "
+            f"{book.title} - "
+            f"{categories}\n"
+            )
+        
+# получить все книги с авторами и категориями
+def get_all_books_authors_cat():
+
+    books = (
+        Book.objects
+        .select_related("author")
+        .prefetch_related("categories")
+    )
+
+    print("All books with authors and categories:\n")
+
     for book in books:
-        print(f"Book title: {book.title}\nAuthor: {book.author}\nCategory: {','.join(map(lambda c: c.title, book.categories.all()))}\n***********\n")
+        categories = ", ".join(
+            category.title
+            for category in book.categories.all()
+        )
+
+        print(
+            f"Book title: {book.title}\n"
+            f"Author: {book.author.name}\n"
+            f"Categories: {categories}\n"
+            f"*******************\n"
+        )
 
 # получить первую книгу
 def get_first_book():
@@ -36,7 +89,7 @@ def get_first_book():
 
     print(f"First book: {f_book}\n")
 
-# получить последеюю книгу
+# получить последнюю книгу
 def get_last_book():
 
     l_book = Book.objects.last()
@@ -45,8 +98,11 @@ def get_last_book():
 
 get_all_authors()
 get_all_books()
-get_all_books_authors()
+get_book_author()
+get_book_cat()
+get_all_books_authors_cat()
 get_first_book()
 get_last_book()
+
 
 

@@ -2,6 +2,17 @@ from django.core.management.base import BaseCommand
 
 from books.models import(Author, Book, Category)
 
+"""
+в Django обычно сиды делают через custom command:
+Структура:
+
+books/
+└── management/
+    └── commands/
+        └── seed.py
+
+Запуск: python manage.py seed
+"""
 class Command(BaseCommand):
 
     help = "Seed database with test data"
@@ -21,6 +32,9 @@ class Command(BaseCommand):
         author2 = Author.objects.create(
             name="J. K. Rowling"
         )
+        author3 = Author.objects.create(
+            name="William Shakespeare"
+        )
 
         # категории
         horror = Category.objects.create(
@@ -29,6 +43,10 @@ class Command(BaseCommand):
 
         fantasy = Category.objects.create(
             title="Fantasy"
+        )
+
+        romance = Category.objects.create(
+            title="Romance"
         )
 
         # книги
@@ -41,10 +59,15 @@ class Command(BaseCommand):
             title="Harry Potter",
             author=author2
         )
+        book3 = Book.objects.create(
+            title="Romeo and Juliet",
+            author=author3
+        )
 
         # many-to-many
         book1.categories.add(horror, fantasy)
         book2.categories.add(fantasy)
+        book3.categories.add(romance)
 
         self.stdout.write(
             self.style.SUCCESS(

@@ -99,10 +99,9 @@ def get_last_book():
 # получить книгу по индексу
 def get_book_by_index(index):
 
-    ind = index
     try:
-        book = Book.objects.get(id=ind)
-        print(f"Book index {ind} - {book.title}\n")
+        book = Book.objects.get(id=index)
+        print(f"Book index {index} - {book.title}\n")
 
     except Book.DoesNotExist:
         print("Book not found!")
@@ -116,9 +115,37 @@ get_all_books_authors_cat()
 get_first_book()
 get_last_book()
 # **************************
-get_book_by_index(0)
+get_book_by_index(5)
 get_book_by_index(10)
 # **************************
+
+"""
+Также можно добавить:
+
+* фильтрацию с разными условиями
+    - По названию
+    Book.objects.filter(title="Harry Potter")
+    - По автору
+    Book.objects.filter(author_id=1)
+
+* проверку существования
+    Book.objects.filter(id=1).exists()
+
+* contains:
+    - Поиск части текста:
+    Book.objects.filter(title__contains="Python")
+    - Без учёта регистра:
+    Book.objects.filter(title__icontains="python")
+
+* order_by()
+    - Порядок по возрастанию
+    Book.objects.order_by("title")
+    - Обратный порядок
+    Book.objects.order_by("-title")
+
+* count()
+    Book.objects.count()
+"""
 
 
 

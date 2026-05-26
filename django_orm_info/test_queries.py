@@ -116,7 +116,7 @@ get_all_books_authors_cat()
 get_first_book()
 get_last_book()
 # **************************
-get_book_by_index(2)
+get_book_by_index(0)
 get_book_by_index(10)
 # **************************
 
